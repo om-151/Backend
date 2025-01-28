@@ -10,17 +10,22 @@ const paymentRoute = require("./routes/payment-routes")
 const app = express()
 const port = process.env.PORT || 3000
 
+const allowedOrigins = ['https://frontend-p6xn.onrender.com'];
+
 const corsOptions = {
     origin: (origin, callback) => {
-        const allowedOrigins = '*';
-        const isAllowed = allowedOrigins.includes(origin);
-        callback(null, isAllowed ? origin : false)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     },
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
-}
+};
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
+
 
 app.use(express.json())
 app.use(bodyParser.json())
