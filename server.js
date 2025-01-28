@@ -10,7 +10,7 @@ const paymentRoute = require("./routes/payment-routes")
 const app = express()
 const port = process.env.PORT || 3000
 
-const allowedOrigins = ['https://frontend-p6xn.onrender.com/undefined'];
+const allowedOrigins = ['https://frontend-p6xn.onrender.com'];
 
 const corsOptions = {
     origin: (origin, callback) => {
