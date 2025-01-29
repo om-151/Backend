@@ -6,7 +6,7 @@ const paymentController = async (req, res) => {
 
     try {
         const paymentIntent = await stripe.paymentIntents.create({
-            amount, // Amount in cents
+            amount,
             currency,
             automatic_payment_methods: { enabled: true },
         });

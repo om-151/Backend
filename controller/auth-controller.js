@@ -7,13 +7,12 @@ const home = async (req, res) => {
             .status(200)
             .send("Welcome to mr.om sonani website, live life.")
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
 const register = async (req, res, next) => {
     try {
-        console.log(req.body);
         const { name, email, phone, password } = req.body
 
         const userExist = await user.findOne({ email });
@@ -36,7 +35,7 @@ const register = async (req, res, next) => {
         })
 
     } catch (error) {
-        console.log(req.body);
+        console.error(req.body);
         next(error)
     }
 }
@@ -46,7 +45,6 @@ const login = async (req, res) => {
         const { email, password } = req.body
 
         const userExist = await user.findOne({ email })
-        console.log(userExist);
 
         if (!userExist) {
             return res.status(400).json({ message: "Invalid Credentials" })
