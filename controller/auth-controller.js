@@ -12,35 +12,6 @@ const home = async (req, res) => {
     }
 }
 
-// const register = async (req, res, next) => {
-//     try {
-//         const { name, email, phone, password } = req.body
-
-//         const userExist = await user.findOne({ email });
-
-//         if (userExist) {
-//             return res.status(400).json({ message: "email already exists." })
-//         }
-
-//         const userCreate = await user.create({
-//             name,
-//             email,
-//             phone,
-//             password,
-//         })
-
-//         res.status(201).json({
-//             msg: "Registration successful.",
-//             token: await userCreate.generateToken(),
-//             userId: userCreate._id.toString(),
-//         })
-
-//     } catch (error) {
-//         console.error(req.body);
-//         next(error)
-//     }
-// }
-
 const register = async (req, res, next) => {
     try {
         const { name, email, phone, password } = req.body;
@@ -109,32 +80,6 @@ const register = async (req, res, next) => {
     }
 };
 
-// const login = async (req, res) => {
-//     try {
-//         const { email, password } = req.body
-
-//         const userExist = await user.findOne({ email })
-
-//         if (!userExist) {
-//             return res.status(400).json({ message: "Invalid Credentials" })
-//         }
-
-//         const User = await userExist.comparePassword(password)
-
-//         if (User) {
-//             res.status(200).json({
-//                 msg: "Login successful.",
-//                 token: await userExist.generateToken(),
-//                 userId: userExist._id.toString(),
-//             });
-//         } else {
-//             res.status(401).json({ message: "Invalid email or password." })
-//         }
-
-//     } catch (error) {
-//         res.status(500).json("internal server error.")
-//     }
-// }
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -148,7 +93,6 @@ const login = async (req, res) => {
         const isPasswordCorrect = await userExist.comparePassword(password);
 
         if (isPasswordCorrect) {
-            // ✅ Send Login Success Email
             const emailSent = await sendEmail(
                 email,
                 "Logged in Successfully - Welcome Back to Humayoo!",
@@ -237,7 +181,6 @@ const sendGoogleWelcomeEmail = async (req, res) => {
     try {
         const { name, email } = req.body;
 
-        // ✅ Send Welcome Email
         const emailSent = await sendEmail(
             email,
             "Welcome to Humayoo - Your Shopping Adventure Begins!",
