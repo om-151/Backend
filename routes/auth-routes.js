@@ -12,4 +12,6 @@ router.route("/login").post(validate(loginSchema), authControllers.login)
 
 router.route("/products").get(authControllers.products)
 
+router.route("/google-welcome-email").post(authControllers.sendGoogleWelcomeEmail);
+
 module.exports = router
